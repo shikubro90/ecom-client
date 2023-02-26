@@ -1,14 +1,33 @@
 import React, { useState } from "react";
 import Jumbotron from "../components/cards/Jumbotron";
-
+import axios from "axios";
+import { toast } from "react-hot-toast";
 const Register = () => {
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("shiku");
+  const [email, setEmail] = useState("shikubro90@gmail.com");
+  const [password, setPassword] = useState("asdfasdf");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, password);
+    // console.log(name, email, password)
+    try {
+      const { data } = await axios.post(
+        `${process.env.REACT_APP_API}/register`,
+        {
+          name,
+          email,
+          password,
+        }
+      );
+      console.log(data);
+      if (data?.error) {
+        toast.error(data.error);
+      } else {
+        toast.success("Registration success");
+      }
+    } catch (e) {
+      toast.error("Registration filed, try again please.");
+    }
   };
 
   return (
