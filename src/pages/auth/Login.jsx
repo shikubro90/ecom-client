@@ -1,55 +1,55 @@
 import React, { useState } from "react";
-import Jumbotron from "../components/cards/Jumbotron";
+import Jumbotron from "../../components/cards/Jumbotron";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-const Register = () => {
-  const [name, setName] = useState("shiku");
-  const [email, setEmail] = useState("shikubro90@gmail.com");
-  const [password, setPassword] = useState("asdfasdf");
+import { useAuth } from "../../context.js/auth";
+
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [auth, setAuth] = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log(name, email, password)
     try {
-      const { data } = await axios.post(
-        `${process.env.REACT_APP_API}/register`,
-        {
-          name,
+      const {data} = await axios
+        .post(`${process.env.REACT_APP_API}/login`, {
           email,
           password,
-        }
-      );
-      console.log(data);
+        })
+      console.log(data)
       if (data?.error) {
-        toast.error(data.error);
+        toast.error("Login Failed")
       } else {
-        toast.success("Registration success");
+        localStorage.setItem("auth", JSON.stringify(data))
+        setAuth({ ...auth, token: data.token, user: data.user })
+        toast.success("Login Success")
       }
-    } catch (e) {
-      toast.error("Registration filed, try again please.");
+        // .then((res) => {
+        //   toast.success("Successfully Login");
+        //   localStorage.setItem("auth", JSON.stringify(res));
+        //   setAuth({ ...auth, user: res.user, token: res.token });
+        // })
+        // .catch((err) => console.log(err));
+    } catch (error) {
+      console.log(error);
+      toast.error("Login Failed");
     }
   };
 
   return (
     <div>
-      <Jumbotron title="Register" subTitle="Welcome to Register page" />
+      <Jumbotron title="Login" subTitle="Welcome to Login page" />
       <div className="container mt-5">
         <div className="row">
           <div className="col-md-6 offset-md-3">
             <form onSubmit={handleSubmit}>
               <input
-                type="text"
-                value={name}
-                placeholder="Enter you name"
-                className="form-control mb-4 p-2"
-                autoFocus
-                onChange={(e) => setName(e.target.value)}
-              />
-              <input
                 type="email"
                 value={email}
-                placeholder="Enter you email"
+                placeholder="Enter your email"
                 className="form-control mb-4 p-2"
+                autoFocus
                 onChange={(e) => setEmail(e.target.value)}
               />
               <input
@@ -70,4 +70,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
