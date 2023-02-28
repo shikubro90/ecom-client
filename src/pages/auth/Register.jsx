@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Register = () => {
   const [name, setName] = useState("shiku");
   const [email, setEmail] = useState("shikubro90@gmail.com");
   const [password, setPassword] = useState("asdfasdf");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,11 +21,11 @@ const Register = () => {
           password,
         }
       );
-      console.log(data);
       if (data?.error) {
         toast.error(data.error);
       } else {
         toast.success("Registration success");
+        navigate("/login")
       }
     } catch (e) {
       toast.error("Registration filed, try again please.");

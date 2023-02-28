@@ -5,6 +5,12 @@ import Register from "./pages/auth/Register";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Menu from "./components/nav/Menu";
 import { Toaster } from "react-hot-toast";
+import PrivateRoute from "./components/routes/PrivateRoute";
+import Dashboard from "./pages/user/Dashboard";
+import AdminRoute from "./components/routes/AdminRoute";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import Category from "./pages/admin/Category";
+import Products from "./pages/admin/Products";
 
 function App() {
   return (
@@ -13,9 +19,17 @@ function App() {
         <Menu />
         <Toaster />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/dashboard" element={<PrivateRoute/>}>
+            <Route path="" element={<Dashboard/>} />
+          </Route>
+          <Route path="/dashboard" element={<AdminRoute/>}>
+            <Route path="admin" element={<AdminDashboard/>} />
+            <Route path="admin/category" element={<Category/>} />
+            <Route path="admin/product" element={<Products/>} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </>
