@@ -4,7 +4,7 @@ import { useAuth } from "../../context.js/auth";
 import Loading from "./Loading";
 
 const PrivateRoute = () => {
-  const [auth, setAuth] = useAuth();
+  const [auth] = useAuth();
   const [ok, setOk] = useState(false);
   useEffect(() => {
     if (auth?.token) {

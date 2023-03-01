@@ -22,7 +22,7 @@ const AdminDashboard = () => {
             <ul className="list-group">
               <li className="list-group-item">{auth?.user?.name}</li>
               <li className="list-group-item">{auth?.user?.email}</li>
-              <li className="list-group-item">Admin</li>
+              <li className="list-group-item">{auth?.user?.role}</li>
             </ul>
           </div>
         </div>
