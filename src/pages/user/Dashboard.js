@@ -1,8 +1,15 @@
-import React from 'react'
-
+import Jumbotron from "../../components/cards/Jumbotron"
+import UserMenu from "../../components/nav/UserMenu"
+import { useAuth } from "../../context.js/auth"
 const Dashboard = () => {
+  const [auth] = useAuth()
   return (
-    <div>Dashboard</div>
+    <>
+      <Jumbotron title={`Hello ${auth?.user?.name.toUpperCase()}`} subTitle="Dashboard" />
+
+      <UserMenu/>
+
+    </>
   )
 }
 

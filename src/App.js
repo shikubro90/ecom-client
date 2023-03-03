@@ -11,6 +11,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import Category from "./pages/admin/Category";
 import Products from "./pages/admin/Products";
+import PageFotFound from "./pages/PageFotFound";
 
 function App() {
   return (
@@ -22,14 +23,15 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<PrivateRoute/>}>
-            <Route path="" element={<Dashboard/>} />
+          <Route path="/dashboard" element={<PrivateRoute />}>
+            <Route path="user" element={<Dashboard />} />
           </Route>
-          <Route path="/dashboard" element={<AdminRoute/>}>
-            <Route path="admin" element={<AdminDashboard/>} />
-            <Route path="admin/category" element={<Category/>} />
-            <Route path="admin/product" element={<Products/>} />
+          <Route path="/dashboard" element={<AdminRoute />}>
+            <Route path="admin" element={<AdminDashboard />} />
+            <Route path="admin/category" element={<Category />} />
+            <Route path="admin/product" element={<Products />} />
           </Route>
+          <Route path="*" element={<PageFotFound />} />
         </Routes>
       </BrowserRouter>
     </>

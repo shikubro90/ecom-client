@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context.js/auth";
+import useCategory from "../../hooks/useCategory";
 const Menu = () => {
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -9,6 +10,9 @@ const Menu = () => {
     localStorage.removeItem("auth");
     navigate("/login");
   };
+
+  const category = useCategory();
+
   return (
     <>
       <ul className="nav d-flex justify-content-between shadow-sm mb-2 sticky-top bg-light">
@@ -17,6 +21,37 @@ const Menu = () => {
             Home
           </NavLink>
         </li>
+
+        <div className="dropdown">
+          <li>
+            <a
+              href=""
+              className="nav-link pointer dropdown-toggle"
+              data-bs-toggle="dropdown"
+            >
+              CATEGORY
+            </a>
+
+            <ul
+              className="dropdown-menu"
+              style={{ height: "300px", overflow: "scroll" }}
+            >
+              <li>
+                <NavLink to="/categories">All Category</NavLink>
+              </li>
+              {category.map((e) => {
+                console.log(e._id)
+                return (
+                  
+                  <li key={e._id}>
+                    
+                    <NavLink to={`/category/${e.slug}`} className="nav-link">{e.name}</NavLink>
+                  </li>
+                );
+              })}
+            </ul>
+          </li>
+        </div>
 
         {!auth?.user ? (
           <>
@@ -45,8 +80,9 @@ const Menu = () => {
                 <li>
                   <NavLink
                     className="nav-link"
-                    to={`/dashboard/${auth?.user?.role === 1 ? "admin" : "user"
-                      }`}
+                    to={`/dashboard/${
+                      auth?.user?.role === 1 ? "admin" : "user"
+                    }`}
                   >
                     Dashboard
                   </NavLink>

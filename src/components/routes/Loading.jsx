@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-const Loading = () => {
+import image from '../../images/preloader.png'
+const Loading = ({ path = "loading" }) => {
   const [count, setCount] = useState(3);
   const navigation = useNavigate();
   useEffect(() => {
     const Interval = setInterval(() => {
       setCount((pre) => --pre);
     }, 1000);
-    count === 0 && navigation("/login");
+    count === 0 && navigation(`/${path}`);
     return () => clearInterval(Interval);
   }, [count]);
   return (
@@ -22,7 +22,7 @@ const Loading = () => {
       }}
     >
       <div className="counter">
-        <h1>{count}</h1>
+        <img alt="preloader" src={image} />
       </div>
     </div>
   );

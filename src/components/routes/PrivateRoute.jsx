@@ -13,7 +13,7 @@ const PrivateRoute = () => {
       setOk(false);
     }
   }, [auth?.token]);
-  return ok ? <Outlet /> : <Loading />;
+  return ok ? <Outlet /> : <Loading path="" />;
 };
 
 export default PrivateRoute;
