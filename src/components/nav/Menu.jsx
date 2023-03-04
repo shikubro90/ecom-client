@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context.js/auth";
+import { useAuth } from "../../context/auth";
 import useCategory from "../../hooks/useCategory";
 const Menu = () => {
   const [auth, setAuth] = useAuth();

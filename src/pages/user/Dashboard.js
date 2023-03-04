@@ -1,6 +1,6 @@
 import Jumbotron from "../../components/cards/Jumbotron"
 import UserMenu from "../../components/nav/UserMenu"
-import { useAuth } from "../../context.js/auth"
+import { useAuth } from "../../context/auth"
 const Dashboard = () => {
   const [auth] = useAuth()
   return (

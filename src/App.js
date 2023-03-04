@@ -9,9 +9,10 @@ import PrivateRoute from "./components/routes/PrivateRoute";
 import Dashboard from "./pages/user/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import Category from "./pages/admin/Category";
+// import Category from "./pages/admin/AdminCategory";
 import Products from "./pages/admin/Products";
 import PageFotFound from "./pages/PageFotFound";
+import AdminCategory from "./pages/admin/AdminCategory";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           </Route>
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
-            <Route path="admin/category" element={<Category />} />
+            <Route path="admin/category" element={<AdminCategory />} />
             <Route path="admin/product" element={<Products />} />
           </Route>
           <Route path="*" element={<PageFotFound />} />

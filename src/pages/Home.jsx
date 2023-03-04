@@ -1,5 +1,5 @@
 import Jumbotron from "../components/cards/Jumbotron";
-import { useAuth } from "../context.js/auth";
+import { useAuth } from "../context/auth";
 function Home() {
 
   const [auth] = useAuth()

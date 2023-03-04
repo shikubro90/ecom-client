@@ -15,6 +15,7 @@ const CategoryForm = ({
           className="form-control p-3"
           placeholder="Write category name"
           value={value}
+          onChange={(e)=> setValue(e.target.value)}
         />
         <div className="d-flex justify-content-between">
           <button className="btn btn-primary mt-3">{buttonText}</button>

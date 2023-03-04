@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useAuth } from "../../context.js/auth";
+import { useAuth } from "../../context/auth";
 import Loading from "./Loading";
 
 const AdminRoute = () => {

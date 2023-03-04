@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-import { useAuth } from "../../context.js/auth";
+import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
 
 
