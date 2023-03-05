@@ -30,24 +30,59 @@ const AdminCategory = () => {
     }
   };
 
-  const handleSubmit = async (e)=>{
-    e.preventDefault()
-    try{
-      console.log(name)
-      const {data} = await axios.post("/category", {name});
-      
-      if(data?.error){
-        toast.error(data.error);
-      }else{
-        loadCategory();
-        setName("")
-        toast.success(`${data.name} is created`)
-      }
-    }catch(err){
-      console.log(err)
-    }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(name);
+      const { data } = await axios.post("/category", { name });
 
-  }
+      if (data?.error) {
+        toast.error(data.error);
+      } else {
+        loadCategory();
+        setName("");
+        toast.success(`${data.name} is created`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.delete(`/remove/${selected._id}`);
+      if (data?.error) {
+        toast.error(data.error);
+      } else {
+        toast.success(`${data.name} is deleted`);
+        loadCategory();
+        setSelected(null);
+        setVisiable(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.put(`/update-category/${selected._id}
+      `,{name : updatatingName});
+      if (data?.error) {
+        toast.error(data.error);
+      } else {
+        toast.success(`${data.name} is update`);
+        loadCategory();
+        setSelected(null);
+        setVisiable(false);
+        updatatingName("");
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <>
@@ -67,14 +102,38 @@ const AdminCategory = () => {
                 setValue={setName}
                 handleSubmit={handleSubmit}
               />
-              <hr/>
+              <hr />
               <div className="col">
-                  {categories?.map((e)=>{
-                    return (
-                      <button key={e._id} className="btn btn-outline-primary m-3">{e.name}</button>
-                    )
-                  })}
+                {categories?.map((e) => {
+                  return (
+                    <button
+                      onClick={() => {
+                        setSelected(e);
+                        setVisiable(true);
+                        setUpdatingName(e.name);
+                      }}
+                      key={e._id}
+                      className="btn btn-outline-primary m-3"
+                    >
+                      {e.name}
+                    </button>
+                  );
+                })}
               </div>
+              <Modal
+                open={visiable}
+                onOk={() => setVisiable(false)}
+                onCancel={() => setVisiable(false)}
+                footer={null}
+              >
+                <CategoryForm
+                  value={updatatingName}
+                  setValue={setUpdatingName}
+                  handleSubmit={handleUpdate}
+                  handleDelete={handleDelete}
+                  buttonText="Update"
+                />
+              </Modal>
             </div>
           </div>
         </div>
