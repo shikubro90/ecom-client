@@ -20,7 +20,6 @@ const Login = () => {
           email,
           password,
         })
-      console.log(data)
       if (data?.error) {
         toast.error("Login Failed")
       } else {

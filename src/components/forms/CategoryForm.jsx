@@ -10,6 +10,7 @@ const CategoryForm = ({
   return (
     <div className="p-3">
       <form onSubmit={handleSubmit}>
+        
         <input
           type="text"
           className="form-control p-3"

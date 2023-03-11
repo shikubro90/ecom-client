@@ -13,6 +13,7 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import Products from "./pages/admin/Products";
 import PageFotFound from "./pages/PageFotFound";
 import AdminCategory from "./pages/admin/AdminCategory";
+import AdminProducts from "./pages/admin/AdminProducts";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/category" element={<AdminCategory />} />
             <Route path="admin/product" element={<Products />} />
+            <Route path="admin/products" element={<AdminProducts />} />
           </Route>
           <Route path="*" element={<PageFotFound />} />
         </Routes>
