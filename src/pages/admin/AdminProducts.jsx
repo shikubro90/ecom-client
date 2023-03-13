@@ -9,7 +9,7 @@ import moment from "moment";
 const AdminProducts = () => {
   const [auth] = useAuth();
   const [products, setProducts] = useState([]);
-  console.log(products)
+  console.log(products);
   useEffect(() => {
     loadProduct();
   }, []);
