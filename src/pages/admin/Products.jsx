@@ -19,7 +19,7 @@ const Products = () => {
   const [category, setCategory] = useState("");
   const [shipping, setShipping] = useState("");
   const [quantity, setQuantity] = useState("");
-  const navigate  = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     loadCategory();

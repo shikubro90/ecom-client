@@ -2,22 +2,26 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Jumbotron from "../components/cards/Jumbotron";
 import ProductsCard from "../components/cards/ProductsCard";
-import { useAuth } from "../context/auth";
 
-function Home() {
-  const [auth] = useAuth();
-  console.log(auth)
+const Home = () => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
-  const [total, setTotal] = useState(5);
+  console.log(products)
+  const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   useEffect(() => {
     loadProduct();
+    getTotal();
   }, []);
+
+  useEffect(() => {
+    if (page === 1) return;
+    loadMore();
+  }, [page]);
 
   const loadProduct = async () => {
     try {
-      const { data } = await axios.get("/products");
+      const { data } = await axios.get(`/list-product/${page}`);
       setProducts(data);
     } catch (error) {
       console.log(error);
@@ -28,15 +32,25 @@ function Home() {
     try {
       setLoading(true);
       const { data } = await axios.get(`/list-product/${page}`);
-      setProducts(data);
+      setProducts([...products, ...data]);
+      setLoading(false)
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const getTotal = async () => {
+    try {
+      const { data } = await axios.get("/count-product");
+      setTotal(data);
     } catch (error) {
       console.log(error);
     }
   };
 
   const arr = [...products];
-  const sortProduct = arr.sort((a, b) => (a.sold < b.sold ? 1 : -1));
-  console.log(sortProduct);
+  const sortProduct = arr?.sort((a, b) => (a.sold < b.sold ? 1 : -1));
   return (
     <>
       <Jumbotron title="" />

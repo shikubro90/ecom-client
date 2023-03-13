@@ -40,7 +40,7 @@ const Menu = () => {
                 <NavLink to="/categories">All Category</NavLink>
               </li>
               {category.map((e) => {
-                console.log(e._id)
+                
                 return (
                   
                   <li key={e._id}>
