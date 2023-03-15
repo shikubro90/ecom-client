@@ -14,6 +14,7 @@ import Products from "./pages/admin/Products";
 import PageFotFound from "./pages/PageFotFound";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminProducts from "./pages/admin/AdminProducts";
+import Shop from "./pages/Shop";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/shop" element={<Shop/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="user" element={<Dashboard />} />

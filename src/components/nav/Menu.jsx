@@ -22,6 +22,12 @@ const Menu = () => {
           </NavLink>
         </li>
 
+        <li className="">
+          <NavLink className="nav-link" to="/shop" arial-aria-current="page">
+            Shop
+          </NavLink>
+        </li>
+
         <div className="dropdown">
           <li>
             <a
@@ -40,12 +46,11 @@ const Menu = () => {
                 <NavLink to="/categories">All Category</NavLink>
               </li>
               {category.map((e) => {
-                
                 return (
-                  
                   <li key={e._id}>
-                    
-                    <NavLink to={`/category/${e.slug}`} className="nav-link">{e.name}</NavLink>
+                    <NavLink to={`/category/${e.slug}`} className="nav-link">
+                      {e.name}
+                    </NavLink>
                   </li>
                 );
               })}
