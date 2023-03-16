@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import useCategory from "../../hooks/useCategory";
+import Search from "../forms/Search";
 const Menu = () => {
   const [auth, setAuth] = useAuth();
   const navigate = useNavigate();
@@ -57,7 +58,9 @@ const Menu = () => {
             </ul>
           </li>
         </div>
-
+        <li>
+          <Search/>
+          </li>
         {!auth?.user ? (
           <>
             <li>

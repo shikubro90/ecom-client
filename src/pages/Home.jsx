@@ -6,7 +6,7 @@ import ProductsCard from "../components/cards/ProductsCard";
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [products, setProducts] = useState([]);
-  console.log(products)
+  console.log(products);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   useEffect(() => {
@@ -33,7 +33,7 @@ const Home = () => {
       setLoading(true);
       const { data } = await axios.get(`/list-product/${page}`);
       setProducts([...products, ...data]);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.log(error);
       setLoading(false);
@@ -96,6 +96,6 @@ const Home = () => {
       </div>
     </>
   );
-}
+};
 
 export default Home;
