@@ -4,7 +4,8 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/cart";
 
-const ProductsCard = ({ p }) => {
+const ProductsCard = ({ p, bootstrapInfo }) => {
+  
   const navigate = useNavigate();
   const [cart, setCart] = useCart();
 
@@ -29,7 +30,8 @@ const ProductsCard = ({ p }) => {
       </Badge.Ribbon>
 
       <div className="card-body">
-        <h5>{p.name}</h5>
+        {bootstrapInfo?.titleInfo === "fz-h1-fw-bold" ? <h1>{ p.name}</h1> : <h5>{p.name}</h5> }
+        <p className="card-text lead">{p?.description}</p>
         <h4 className="fw-bold">
           {p?.price?.toLocaleString("en-US", {
             style: "currency",
@@ -39,17 +41,25 @@ const ProductsCard = ({ p }) => {
         <p>{p?.description?.substring(0, 60)}....</p>
       </div>
       <div className="d-flex justify-content-between">
-        <button
-          className="btn btn-primary col card-button"
-          style={{ borderBottomLeftRadius: "5px" }}
+        {bootstrapInfo?.buttonInfo === "!viewProduct" ? null : (
+          <button
+            className="btn btn-primary col card-button"
+            style={{ borderBottomLeftRadius: "5px" }}
+            onClick={(e) => navigate(`/products/${p.slug}`)}
+          >
+            View Products
+          </button>
+        )}
+
+        <div
+          className="btn btn-outline-primary col card-button"
+          style={{ borderBottomRightRadius: "5px" }}
+          onClick={(e) => {
+            setCart([...cart, p]);
+            localStorage.setItem("cart", JSON.stringify([...cart, p]));
+            toast.success("Added to cart");
+          }}
         >
-          View Products
-        </button>
-        <div className="btn btn-outline-primary col card-button" style={{ borderBottomRightRadius: "5px" }} onClick={(e) => { 
-          setCart([...cart, p]);
-        localStorage.setItem("cart", JSON.stringify([...cart, p]));
-        toast.success("Added to cart")
-         }}>
           Add to Cart
         </div>
       </div>

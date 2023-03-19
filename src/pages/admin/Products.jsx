@@ -12,7 +12,6 @@ const Products = () => {
   const [auth] = useAuth();
   const [categories, setCategories] = useState([]);
   const [photo, setPhoto] = useState("");
-  // console.log(photo);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");

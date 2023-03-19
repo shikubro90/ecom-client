@@ -16,6 +16,7 @@ import AdminCategory from "./pages/admin/AdminCategory";
 import AdminProducts from "./pages/admin/AdminProducts";
 import Shop from "./pages/Shop";
 import Search from "./pages/Search";
+import ProductsCardView from "./pages/ProductsCardView";
 
 function App() {
   return (
@@ -27,7 +28,8 @@ function App() {
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/search" element={<Search/>} />
-          <Route path="/shop" element={<Shop/>} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/products/:slug" element={ <ProductsCardView/>} />
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="user" element={<Dashboard />} />
