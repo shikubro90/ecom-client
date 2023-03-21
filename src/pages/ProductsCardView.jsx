@@ -33,7 +33,11 @@ const ProductsCardView = () => {
         <div className="col-md-9">
           <ProductsCard p={product} bootstrapInfo={bootstrapInfo}  />
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-3">
+          <h2>Related Products</h2>
+          <hr />
+          
+        </div>
       </div>
     </div>
   );
