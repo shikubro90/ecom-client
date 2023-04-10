@@ -17,6 +17,7 @@ import AdminProducts from "./pages/admin/AdminProducts";
 import Shop from "./pages/Shop";
 import Search from "./pages/Search";
 import ProductsCardView from "./pages/ProductsCardView";
+import Cart from "./pages/Cart";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Routes>
           <Route path="/" exact element={<Home />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/cart" element={<Cart />} />
           <Route path="/search" element={<Search/>} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/products/:slug" element={ <ProductsCardView/>} />

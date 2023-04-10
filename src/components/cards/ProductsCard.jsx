@@ -25,7 +25,7 @@ const ProductsCard = ({ p, bootstrapInfo }) => {
     <>
       {bootstrapInfo ? (
         <div className="card mb-3 hoverable">
-          <Badge.Ribbon text={`${p?.sold} sold`} color="red">
+          {/* <Badge.Ribbon text={`${p?.sold} sold`} color="red">
             <Badge.Ribbon
               text={`${
                 p?.quantity >= 1
@@ -35,13 +35,13 @@ const ProductsCard = ({ p, bootstrapInfo }) => {
               placement="start"
               color="green"
             >
+            </Badge.Ribbon>
+          </Badge.Ribbon> */}
               <img
                 className="card-img-top"
                 src={`${process.env.REACT_APP_API}/product/photo/${p._id}`}
                 alt=""
               />  
-            </Badge.Ribbon>
-          </Badge.Ribbon>
 
           <div className="card-body">
             <h1>{p.name}</h1>

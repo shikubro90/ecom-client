@@ -3,8 +3,11 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import useCategory from "../../hooks/useCategory";
 import Search from "../forms/Search";
+import { Badge } from "antd";
+import { useCart } from "../../context/cart";
 const Menu = () => {
   const [auth, setAuth] = useAuth();
+  const [cart, setCart] = useCart();
   const navigate = useNavigate();
   const handleLogout = () => {
     setAuth({ ...auth, user: null, token: "" });
@@ -58,9 +61,21 @@ const Menu = () => {
             </ul>
           </li>
         </div>
+
+        <li className="">
+          <Badge
+            count={cart?.length >= 1 ? cart.length : 0}
+            offset={[-5, 11]}
+            showZero={true}
+          >
+            <NavLink className="nav-link" to="/cart" arial-aria-current="page">
+              Cart
+            </NavLink>
+          </Badge>
+        </li>
         <li>
-          <Search/>
-          </li>
+          <Search />
+        </li>
         {!auth?.user ? (
           <>
             <li>
