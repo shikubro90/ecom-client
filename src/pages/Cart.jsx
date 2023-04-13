@@ -3,6 +3,8 @@ import Jumbotron from "../components/cards/Jumbotron";
 import { useCart } from "../context/cart";
 import { useAuth } from "../context/auth";
 import { useNavigate } from "react-router-dom";
+import ProductCardHoraizontal from "../components/cards/ProductCardHoraizontal";
+import UserCardSideBar from "../components/cards/UserCardSideBar";
 
 
 const Cart = () => {
@@ -35,6 +37,27 @@ const Cart = () => {
           </div>
         </div>
       </div>
+
+      {
+        cart?.length && (
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8">
+                <div className="row">
+                  {cart?.map((product, index) => {
+                    return (<ProductCardHoraizontal key={index} p={product} />)
+                  })}
+                </div>
+              </div>
+              <div className="col-md-4">
+                <div className="use-card-side-bar">
+                  <UserCardSideBar/>
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
 
     </div>
   );
