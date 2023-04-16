@@ -42,14 +42,14 @@ const Cart = () => {
         cart?.length && (
           <div className="container">
             <div className="row">
-              <div className="col-md-8">
+              <div className="col-md-7">
                 <div className="row">
                   {cart?.map((product, index) => {
                     return (<ProductCardHoraizontal key={index} p={product} />)
                   })}
                 </div>
               </div>
-              <div className="col-md-4">
+              <div className="col-md-5">
                 <div className="use-card-side-bar">
                   <UserCardSideBar/>
                 </div>
