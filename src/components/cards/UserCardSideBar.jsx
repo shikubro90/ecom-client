@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth";
 import { useCart } from "../../context/cart";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import DropIn from "braintree-web-drop-in-react";
 
 const UserCardSideBar = () => {
   const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
+  const [clientToken, setClientToken] = useState("");
+  const [instance, setInstance] = useState("")
+  const [loading, setLoading] = useState(false)
+
   const navigate = useNavigate();
+
+  // get token
+
+  useEffect(() => {
+    if (auth?.token) {
+      getClientToken();
+    }
+  }, [auth?.token]);
+
+  const getClientToken = async () => {
+    try {
+      const { data } = await axios.get("/braintree/token");
+      setClientToken(data.clientToken);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // total price
   const cartTotal = () => {
@@ -22,8 +45,8 @@ const UserCardSideBar = () => {
 
   return (
     <div className="col-md-5 mb-5">
-      <div className="cart-info" style={{width : "100%"}}>
-        <div className="cart-title" style={{width : "100%"}}>
+      <div className="cart-info" style={{ width: "100%" }}>
+        <div className="cart-title" style={{ width: "100%" }}>
           <h4>Your Cart Summary</h4>
           <p>Total / Address / Payment</p>
         </div>
@@ -36,34 +59,70 @@ const UserCardSideBar = () => {
             <>
               <div className="mb-3">
                 <div className="user-address">
-                <h4>Delivery Address</h4>
-                <h5>{auth?.user?.address}</h5>
+                  <h4>Delivery Address</h4>
+                  <h5>{auth?.user?.address}</h5>
                 </div>
                 <div className="user-update">
-                  <button className="btn btn-outline-warning" onClick={()=>navigate("/dashboard/user")}>
+                  <button
+                    className="btn btn-outline-warning"
+                    onClick={() => navigate("/dashboard/user")}
+                  >
                     Update Address
                   </button>
                 </div>
               </div>
             </>
           ) : (
-              <>
-                <div className="mb-3">
-                  {auth?.token ? (
-                    <>
-                      <button className="btn btn-outline-warning" onClick={()=>navigate("/dashboard/user")}>
-                        Add delivery address
-                      </button>
-                    </>
-                  ) : (<>
-                      <button className="btn btn-danger" onClick={()=>navigate("/login")}>
-                        Login to check out
-                      </button>
-                  </>)}
+            <>
+              <div className="mb-3">
+                {auth?.token ? (
+                  <>
+                    <button
+                      className="btn btn-outline-warning"
+                      onClick={() => navigate("/dashboard/user")}
+                    >
+                      Add delivery address
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => navigate("/login")}
+                    >
+                      Login to check out
+                    </button>
+                  </>
+                )}
               </div>
-              </>
+            </>
           )}
         </div>
+
+        <div className="mt-3">
+          {!clientToken || !cart?.length ? (
+            ""
+          ) : (
+            <>
+              <DropIn
+                options={{
+                  authorization: clientToken,
+                  paypal: {
+                    flow: "vault",
+                  },
+                  }}
+                  onInstance={(instance)=> setInstance(instance)}
+              />
+            </>
+          )}
+        </div>
+        <button 
+          onClick={handleBuy}
+          className="btn btn-primary col-md-12 mt-2"
+          disabled={!auth?.user?.address || !instance || loading}
+        >
+          {loading ? "Processing" : "Buy"}
+        </button>
 
       </div>
     </div>
