@@ -9,7 +9,7 @@ const UserCardSideBar = () => {
   const [cart, setCart] = useCart();
   const [auth, setAuth] = useAuth();
   const [clientToken, setClientToken] = useState("");
-  const [instance, setInstance] = useState("")
+  const [instance, setinstance] = useState("")
   const [loading, setLoading] = useState(false)
 
   const navigate = useNavigate();
@@ -42,6 +42,15 @@ const UserCardSideBar = () => {
       currency: "USD",
     });
   };
+
+  const handleBuy = async () => {
+    try {
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   return (
     <div className="col-md-5 mb-5">
@@ -111,7 +120,7 @@ const UserCardSideBar = () => {
                     flow: "vault",
                   },
                   }}
-                  onInstance={(instance)=> setInstance(instance)}
+                  onInstance={(instance)=> setinstance(instance)}
               />
             </>
           )}
