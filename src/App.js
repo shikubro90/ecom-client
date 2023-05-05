@@ -14,6 +14,7 @@ import Products from "./pages/admin/Products";
 import PageFotFound from "./pages/PageFotFound";
 import AdminCategory from "./pages/admin/AdminCategory";
 import AdminProducts from "./pages/admin/AdminProducts";
+import AdminOrders from "./pages/admin/AdminOrders";
 import Shop from "./pages/Shop";
 import Search from "./pages/Search";
 import ProductsCardView from "./pages/ProductsCardView";
@@ -35,12 +36,14 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="user" element={<Dashboard />} />
+            <Route path="user/orders" element={<Dashboard />} />
           </Route>
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
             <Route path="admin/category" element={<AdminCategory />} />
             <Route path="admin/product" element={<Products />} />
             <Route path="admin/products" element={<AdminProducts />} />
+            <Route path="admin/orders" element={<AdminOrders />} />
           </Route>
           <Route path="*" element={<PageFotFound />} />
         </Routes>
