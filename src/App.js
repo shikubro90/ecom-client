@@ -19,6 +19,7 @@ import Shop from "./pages/Shop";
 import Search from "./pages/Search";
 import ProductsCardView from "./pages/ProductsCardView";
 import Cart from "./pages/Cart";
+import UserOrders from "./pages/user/UserOrders";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/dashboard" element={<PrivateRoute />}>
             <Route path="user" element={<Dashboard />} />
-            <Route path="user/orders" element={<Dashboard />} />
+            <Route path="user/orders" element={<UserOrders/>} />
           </Route>
           <Route path="/dashboard" element={<AdminRoute />}>
             <Route path="admin" element={<AdminDashboard />} />
