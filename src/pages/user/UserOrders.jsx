@@ -63,7 +63,7 @@ const UserOrders = () => {
                       <tr>
                         <td>{i + 1}</td>
                         <td>
-                            <p>Processing</p>
+                            {o?.status}
                         </td>
                         <td>{o?.buyer?.name}</td>
                         <td>{moment(o?.createdAt).fromNow()}</td>
