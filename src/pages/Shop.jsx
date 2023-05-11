@@ -10,7 +10,7 @@ const Shop = () => {
   const [category, setCategory] = useState([]);
   const [checked, setChecked] = useState([]);
   const [radio, setRadio] = useState([]);
-  console.log(radio);
+  
 
   useEffect(() => {
     if (!checked.length) loadProducts();
@@ -39,11 +39,11 @@ const Shop = () => {
   }, []);
 
   const onHandleCheck = (value, id) => {
-    console.log(value, id);
+    
     let all = [...checked];
     if (value) {
       all.push(id);
-      console.log(all);
+      
     } else {
       all = all.filter((e) => e !== id);
     }
@@ -107,8 +107,8 @@ const Shop = () => {
               {products?.length} Products
             </h2>
             <div className="row">
-              {products?.map((p) => (
-                <div className="col-md-4">
+              {products?.map((p,i) => (
+                <div key={i} className="col-md-4">
                   <ProductsCard p={p} />
                 </div>
               ))}

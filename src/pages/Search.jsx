@@ -5,8 +5,7 @@ import { useSearch } from '../context/search'
 
 const Search = () => {
 
-  const [values, setValues] = useSearch()
-  console.log(values)
+  const [values] = useSearch()
 
   return (
     <div>
@@ -14,8 +13,8 @@ const Search = () => {
 
       <div className="container">
         <div className="row">
-          {values?.results?.map((e) => (
-            <div className="col-md-4">
+          {values?.results?.map((e,i) => (
+            <div key={i} className="col-md-4">
               <ProductsCard p={e} />
             </div>
           ))}
